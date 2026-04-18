@@ -55,11 +55,7 @@ Additional information can be found in the [Pixhawk 4 Technical Data Sheet](http
 
 This flight controller supports up to 8 FMU PWM outputs (AUX) and 8 IO PWM outputs (MAIN).
 
-FMU Outputs:
-
-- Outputs 1-4 support [DShot](../peripherals/dshot.md).
-- Outputs 5-8 do not support DShot.
-- Outputs 1-4 support [Bidirectional DShot](../peripherals/dshot.md#bidirectional-dshot-telemetry).
+[DShot](../peripherals/dshot.md) is not supported.
 
 The 8 outputs are in 3 groups:
 
