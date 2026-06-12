@@ -118,11 +118,9 @@ ilabs <command> [arguments...]
    start         Start driver
      -d <val>    Serial device
 
-   status        Driver status
+   status        Print driver status
 
    stop          Stop driver
-
-   status        Print driver status
 ```
 
 ## sbgecom
@@ -184,9 +182,7 @@ vectornav <command> [arguments...]
    start         Start driver
      -d <val>    Serial device
 
-   status        Driver status
+   status        Print driver status
 
    stop          Stop driver
-
-   status        Print driver status
 ```
