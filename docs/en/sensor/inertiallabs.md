@@ -43,27 +43,29 @@ To use the Inertial Labs driver:
 
 1. Build the firmware with the [ilabs](../modules/modules_driver_ins.md#ilabs) module.
 
-   Make sure the UART RX-buffer for the serial port connected to the INS is at least **600 bytes**.
+   - Make sure the UART RX-buffer for the serial port connected to the INS is at least **600 bytes**.
 
-   ::: tip
-   For example, when using TELEM2 on Pixhawk 6X, add the following setting to [defconfig](https://github.com/PX4/PX4-Autopilot/blob/main/boards/px4/fmu-v6x/nuttx-config/nsh/defconfig):
-   `CONFIG_UART5_RXBUFSIZE=600`
-   :::
+     ::: tip
+     For example, when using `TELEM2` on Pixhawk 6X, add the following setting to [defconfig](https://github.com/PX4/PX4-Autopilot/blob/main/boards/px4/fmu-v6x/nuttx-config/nsh/defconfig):
+     `CONFIG_UART5_RXBUFSIZE=600`
 
-   Include the module in firmware in the [kconfig board configuration](../hardware/porting_guide_config.md#px4-board-configuration-kconfig) by setting the kconfig variables: `CONFIG_DRIVERS_INS_ILABS`.
-   In the kconfig interface: Drivers -> INS -> ilabs.
+     Note that the mapping between UART number and port name can usually be found in your board's [Serial Port Mapping](../flight_controller/pixhawk6x.md#serial-port-mapping) section.
+     :::
 
-1. [Set the parameter](../advanced_config/parameters.md) [SENS_ILABS_CFG](../advanced_config/parameter_reference.md#SENS_ILABS_CFG) to the hardware port connected to the sensor, such as a spare `GPS` or `TELEM`.
+   - Include the module in firmware in the [kconfig board configuration](../hardware/porting_guide_config.md#px4-board-configuration-kconfig) by setting the kconfig variables: `CONFIG_DRIVERS_INS_ILABS`.
+     In the kconfig interface: Drivers -> INS -> ilabs.
+
+2. [Set the parameter](../advanced_config/parameters.md) [SENS_ILABS_CFG](../advanced_config/parameter_reference.md#SENS_ILABS_CFG) to the hardware port connected to the sensor, such as a spare `GPS` or `TELEM`.
 
    ::: warning
    Disable or change port of other sensors that are using the same one, for example [GPS_1_CONFIG](../advanced_config/parameter_reference.md#GPS_1_CONFIG) if using GPS1 port.
    :::
 
-1. Allow the Inerital Labs driver to initialize by restarting PX4.
-1. Configure driver to provide IMU data or Raw sensors data :
+3. Allow the Inerital Labs driver to initialize by restarting PX4.
+4. Configure driver to provide IMU data or Raw sensors data :
    - For external INS, set [ILABS_MODE](../advanced_config/parameter_reference.md#ILABS_MODE) to `INS`.
 
-      In this case, the [EKF2_EN](../advanced_config/parameter_reference.md#EKF2_EN), [SENS_IMU_MODE](../advanced_config/parameter_reference.md#SENS_IMU_MODE), and [SENS_MAG_MODE](../advanced_config/parameter_reference.md#SENS_MAG_MODE) parameters are disabled at startup (set to `0`). Аnd the INS's internal EKF is used for orientation.
+     In this case, the [EKF2_EN](../advanced_config/parameter_reference.md#EKF2_EN), [SENS_IMU_MODE](../advanced_config/parameter_reference.md#SENS_IMU_MODE), and [SENS_MAG_MODE](../advanced_config/parameter_reference.md#SENS_MAG_MODE) parameters are disabled at startup (set to `0`). Аnd the INS's internal EKF is used for orientation.
 
    - For raw inertial sensors, set [ILABS_MODE](../advanced_config/parameter_reference.md#ILABS_MODE) to `Sensors Only`.
 
@@ -84,7 +86,7 @@ To use the Inertial Labs driver:
      If you don't want to have this fallback mechanism, you must disable unwanted sensors.
      :::
 
-1. Restart PX4.
+5. Restart PX4.
 
 Once enabled, the module will be detected on boot.
 
